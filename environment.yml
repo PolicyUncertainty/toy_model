@@ -1,0 +1,13 @@
+name: toy_model
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+- numpy
+- pandas
+- flake8
+- pytest
+- pip
+- pip:
+  - pre-commit
+  - black

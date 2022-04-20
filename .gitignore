@@ -1,1 +1,4 @@
 .idea
+prototyping.ipynb
+.ipynb_checkpoints
+__pycache__/

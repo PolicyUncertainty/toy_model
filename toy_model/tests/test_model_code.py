@@ -1,10 +1,18 @@
+import pytest
+
 from toy_model.model_code import utility
 
 
-def test_utility():
+@pytest.fixture(scope="module")
+def input_data():
     cons = 9
-    gamma = 1/2
+    gamma = 1 / 2
     budget = 16
     working = 7
+    return cons, gamma, budget, working
+
+
+def test_utility(input_data):
+    cons, gamma, budget, working = input_data
     util = utility(cons, working, budget, gamma)
     assert util == 6

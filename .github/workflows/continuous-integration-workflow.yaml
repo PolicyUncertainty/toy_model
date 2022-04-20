@@ -29,7 +29,7 @@ jobs:
 
       - name: Run pytest.
         shell: bash -l {0}
-        run: pytest --cov-report=xml --cov=./
+        run: pytest
 
       - name: Run pre-commits.
         shell: bash -l {0}

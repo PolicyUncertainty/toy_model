@@ -31,8 +31,8 @@ jobs:
         shell: bash -l {0}
         run: pytest --cov-report=xml --cov=./
 
-#      - name: Run pre-commits.
-#        shell: bash -l {0}
-#        run: |
-#          pre-commit install -f --install-hooks
-#          pre-commit run --all-files
+      - name: Run pre-commits.
+        shell: bash -l {0}
+        run: |
+          pre-commit install -f --install-hooks
+          pre-commit run --all-files

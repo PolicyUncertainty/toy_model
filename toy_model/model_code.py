@@ -1,9 +1,11 @@
 def utility(consumption, working_hours, hours_budget, gamma):
+    """This function implements a simple cobb douglas utility function."""
     out = consumption**gamma + (hours_budget - working_hours) ** (1 - gamma)
     return out
 
 
 def hourly_wage_systematic(age, beta_0, beta_1, beta_2):
+    """Calculate the hourly wage. So far only dependent on age."""
     out = beta_0 + beta_1 * age + beta_2 * age**2
     return out
 
@@ -16,6 +18,7 @@ def asset_update(
     individual_long_term_costs,
     interest_rate,
 ):
+    """Get new assets"""
     total_income = working_hours * hourly_wage
     compound_assets = (1 + interest_rate) * assets_last_period
     out = compound_assets + total_income - consumption - individual_long_term_costs

@@ -30,3 +30,7 @@ def create_state_space(model_spec):
 
     states = np.array(data, dtype=np.int64)
     return states, indexer
+
+
+def get_index_by_state(indexer, state):
+    return indexer[state[0], state[1], state[2], state[3]]

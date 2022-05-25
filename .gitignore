@@ -3,3 +3,4 @@ prototyping.ipynb
 .ipynb_checkpoints
 __pycache__/
 .pytest_cache
+model_old.py

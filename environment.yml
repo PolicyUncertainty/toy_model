@@ -10,6 +10,7 @@ dependencies:
 - flake8
 - pytest
 - pip
+- numba
 - pip:
   - pre-commit
   - black

@@ -31,14 +31,24 @@ def process_model_constr_inputs(constr):
         model_dict["num_periods"] = np.random.randint(30, 60)
 
     try:
-        model_dict["health_states"] = constr["health_states"]
+        model_dict["num_health_states"] = constr["num_health_states"]
     except KeyError:
-        model_dict["health_states"] = np.arange(0, 2)
+        model_dict["num_health_states"] = 2
 
     try:
-        model_dict["policy_states"] = constr["policy_states"]
+        model_dict["num_policy_states"] = constr["num_policy_states"]
     except KeyError:
-        model_dict["policy_states"] = np.arange(0, 3)
+        model_dict["num_policy_states"] = 2
+
+    try:
+        model_dict["health_costs"] = constr["health_costs"]
+    except KeyError:
+        model_dict["health_costs"] = 500
+
+    try:
+        model_dict["total_hours"] = constr["total_hours"]
+    except KeyError:
+        model_dict["total_hours"] = 16 * 5
 
     try:
         model_dict["num_quad_points"] = constr["N_QUAD"]
@@ -73,6 +83,36 @@ def process_param_constr_inputs(constr):
         param_dict["theta"] = np.append(
             np.random.uniform(1.5, 2.0), np.random.uniform(0, 0.5)
         )
+
+    try:
+        param_dict["wage_coeff"] = constr["WAGE_PARAMS"]
+    except KeyError:
+        param_dict["wage_coeff"] = np.append(
+            np.append(np.random.uniform(1.5, 2.0), np.random.uniform(0, 0.5)),
+            np.random.uniform(0, 0.5),
+        )
+
+    try:
+        param_dict["health_cost_policy"] = constr["POLICY_PARAMS"]
+    except KeyError:
+        param_dict["health_cost_policy"] = np.append(
+            np.random.uniform(0, 0.5), np.random.uniform(0, 0.5)
+        )
+
+    try:
+        param_dict["unemp"] = constr["UNEMP_PARAMS"]
+    except KeyError:
+        param_dict["unemp"] = 200
+
+    try:
+        param_dict["interest_rate"] = constr["INTEREST_RATE"]
+    except KeyError:
+        param_dict["interest_rate"] = 0.05
+
+    try:
+        param_dict["sigma"] = constr["WAGE_SHOCK"]
+    except KeyError:
+        param_dict["sigma"] = np.random.uniform(2.2204e-16, 0.02)
 
     try:
         param_dict["lambda_"] = constr["TASTE_SHOCK"]

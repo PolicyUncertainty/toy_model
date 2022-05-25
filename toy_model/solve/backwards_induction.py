@@ -32,8 +32,8 @@ def conduct_backwards_induction(
 ):
     """This function conducts the backwards induction."""
     Tbar = model_spec_params[0] - 1
-    num_quad = model_spec_params[3]
-    n_savings_grid = model_spec_params[5]
+    num_quad = quadw.shape[0]
+    n_savings_grid = savings_grid.shape[0]
     sigma = budget_params[4]
     beta = discount_params[0]
 
@@ -250,7 +250,9 @@ def conduct_egm(
         next_period_cons, next_period_values, utility_params
     )
     next_period_marginal_utility = next_period_marginal_utility_flatten.reshape(
-        model_spec_params[5], model_spec_params[3]
+        # Size saving grid times num quadrature
+        model_spec_params[3],
+        model_spec_params[1],
     ).T.copy()
     # compute right hand side of the euler equation
     rhs = np.dot(quadw, next_period_marginal_utility * next_period_marg_budget)
@@ -262,8 +264,8 @@ def conduct_egm(
 
 @njit()
 def expected_value_(next_period_value, quadw, utility_params, model_spec_params):
-    num_quad = model_spec_params[3]
-    num_grid = model_spec_params[5]
+    num_quad = quadw.shape[0]
+    num_grid = model_spec_params[3]
 
     if next_period_value.shape[0] != 1:
 

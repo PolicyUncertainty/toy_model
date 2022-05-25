@@ -5,7 +5,8 @@ import numpy as np
 from numba import njit
 from numba import prange
 from numba.typed import List
-from retpy.shared.shared_auxiliary import custom_interp1d
+
+from toy_model.shared.shared_auxiliary import custom_interp1d
 
 
 @njit()

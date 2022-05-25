@@ -24,7 +24,7 @@ def secondary_envelope_wrapper(
     value_ = filter_array(value)
     policy_ = filter_array(policy)
     new_value, new_policy = check_and_correct_constraint_region(
-        value_, policy_, utility_params, choice, model_spec_params[5]
+        value_, policy_, utility_params, choice, model_spec_params[3]
     )
     # conduct secondary envelope
     new_value, removed_indices, newdots = secondary_envelope(new_value)

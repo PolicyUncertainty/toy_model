@@ -26,6 +26,7 @@ def secondary_envelope_wrapper(
     new_value, new_policy = check_and_correct_constraint_region(
         value_, policy_, utility_params, choice, model_spec_params[3]
     )
+
     # conduct secondary envelope
     new_value, removed_indices, newdots = secondary_envelope(new_value)
     # adjust value and policy array if the upper envelope adjusted the value array:
@@ -56,7 +57,6 @@ def secondary_envelope(values):
         # determine unique x values
         unique_x_vals = np.unique(copy_val[0])
         # conduct upper envelope
-
         rslts, newdots = upper_envelop(sections, unique_x_vals, True, True)
         # determine removed values =
         removed_indices = get_indices_deleted_values2(copy_val, rslts)

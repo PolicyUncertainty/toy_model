@@ -43,12 +43,12 @@ def process_model_constr_inputs(constr):
     try:
         model_dict["health_costs"] = constr["health_costs"]
     except KeyError:
-        model_dict["health_costs"] = 500
+        model_dict["health_costs"] = 100
 
-    try:
-        model_dict["total_hours"] = constr["total_hours"]
-    except KeyError:
-        model_dict["total_hours"] = 16 * 5
+    # try:
+    #     model_dict["total_hours"] = constr["total_hours"]
+    # except KeyError:
+    #     model_dict["total_hours"] = 16 * 5
 
     try:
         model_dict["num_quad_points"] = constr["N_QUAD"]
@@ -57,7 +57,7 @@ def process_model_constr_inputs(constr):
     try:
         model_dict["max_grid"] = constr["MAX_GRID"]
     except KeyError:
-        model_dict["max_grid"] = 100
+        model_dict["max_grid"] = 10_000
     try:
         model_dict["num_grid"] = constr["N_GRID"]
     except KeyError:
@@ -80,16 +80,14 @@ def process_param_constr_inputs(constr):
     try:
         param_dict["theta"] = constr["UTILITY_PARAMS"]
     except KeyError:
-        param_dict["theta"] = np.append(
-            np.random.uniform(1.5, 2.0), np.random.uniform(0, 0.5)
-        )
+        param_dict["theta"] = np.random.uniform(0, 1)
 
     try:
         param_dict["wage_coeff"] = constr["WAGE_PARAMS"]
     except KeyError:
         param_dict["wage_coeff"] = np.append(
-            np.append(np.random.uniform(1.5, 2.0), np.random.uniform(0, 0.5)),
-            np.random.uniform(0, 0.5),
+            np.append(np.random.uniform(1.5, 2.0), np.random.uniform(0.01, 0.03)),
+            -np.random.uniform(0, 0.00004),
         )
 
     try:

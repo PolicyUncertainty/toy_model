@@ -9,6 +9,7 @@ def test1():
     """This test creates 10 random model specifications and runs
     solves the associated model.
     """
+    np.random.seed(123)
     for _ in range(10):
         model_spec, param_spec = generate_random_model_spec()
         healt_states_probs = np.zeros(

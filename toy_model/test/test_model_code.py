@@ -1,6 +1,6 @@
 import pytest
 
-from toy_model.model_code import utility
+from toy_model.model_code import util
 
 
 @pytest.fixture(scope="module")
@@ -14,5 +14,5 @@ def input_data():
 
 def test_utility(input_data):
     cons, gamma, budget, working = input_data
-    util = utility(cons, working, budget, gamma)
+    util = util(cons, working, budget, gamma)
     assert util == 6

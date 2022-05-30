@@ -20,8 +20,8 @@ def solve(model_spec, param_spec, exog_gen_params, con_envelope=True):
             model_spec.choices.shape[0],  # 4
             model_spec.num_health_states,  # 5
             model_spec.num_policy_states,  # 6
-            model_spec.total_hours,  # 7
-            model_spec.health_costs,
+            # model_spec.total_hours,
+            model_spec.health_costs,  # 7
         ],
         dtype=np.int32,
     )
@@ -38,8 +38,7 @@ def solve(model_spec, param_spec, exog_gen_params, con_envelope=True):
 
     utility_params = np.array(
         [
-            param_spec.theta[0],  # 0
-            param_spec.theta[1],  # 1
+            param_spec.theta,  # 0
             param_spec.lambda_,  # 2
         ],
         dtype=np.float64,
@@ -67,6 +66,7 @@ def solve(model_spec, param_spec, exog_gen_params, con_envelope=True):
         utility_params,
         budget_params,
         discount_params,
+        exog_gen_params,
         state_space,
         indexer,
         pol,

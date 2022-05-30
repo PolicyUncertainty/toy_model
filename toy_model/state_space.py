@@ -2,6 +2,7 @@ import numpy as np
 from numba import njit
 
 
+@njit()
 def create_state_space(model_spec):
     shape = (
         model_spec.num_periods,
@@ -33,6 +34,7 @@ def create_state_space(model_spec):
     return states, indexer
 
 
+@njit()
 def get_index_by_state(indexer, state):
     return indexer[state[0], state[1], state[2], state[3]]
 
@@ -72,17 +74,18 @@ def assign_bequest(indexer, policy, value, savings_grid, model_spec_params):
     n_savings_grid = savings_grid.shape[0]
 
     # set values for the terminal period (agent can not be working or unemployed
-    # and there is no continuation value)
+    # and there is no continuation value). this is old. Now we just assume
+    # for all choices everything is consumed.
 
     # determine indices of the terminal periods:
     indxs = indexer[Tbar, :, :, :].flatten()
     for inx in indxs:
-        policy[inx, 2, 0, : n_savings_grid + 1] = np.append([0], savings_grid)
-        policy[inx, 2, 1, : n_savings_grid + 1] = np.append([0], savings_grid)
-        value[inx, 2, 0, : n_savings_grid + 1] = np.append(
+        policy[inx, :, 0, : n_savings_grid + 1] = np.append([0], savings_grid)
+        policy[inx, :, 1, : n_savings_grid + 1] = np.append([0], savings_grid)
+        value[inx, :, 0, : n_savings_grid + 1] = np.append(
             [0], np.zeros(n_savings_grid)
         )
-        value[inx, 2, 1, : n_savings_grid + 1] = np.append(
+        value[inx, :, 1, : n_savings_grid + 1] = np.append(
             [0], np.zeros(n_savings_grid)
         )
     return policy, value
